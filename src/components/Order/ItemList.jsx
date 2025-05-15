@@ -12,7 +12,7 @@ import softDrinkLogo from "../../assets/soft-drink.svg";
 import PlusIcon from "../../assets/PlusIcon";
 import MinusIcon from "../../assets/MinusIcon";
 
-function Item({ name, logo, price, addAmount, deductAmount }) {
+function Item({ name, logo, price, addAmount, deductAmount, selectedItem }) {
     return (
         <>
             <div className="bg-gray-700 bg-opacity-30 rounded-md p-3 mb-3 flex justify-between items-center hover:bg-opacity-40 transition-all duration-300">
@@ -27,14 +27,16 @@ function Item({ name, logo, price, addAmount, deductAmount }) {
                 </div>
 
                 <div className="flex justify-center gap-5">
-                    <button
-                        className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
-                        onClick={() => {
-                            deductAmount(name, price);
-                        }}
-                    >
-                        <MinusIcon />
-                    </button>
+                    {selectedItem[name] > 0 && (
+                        <button
+                            className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                            onClick={() => {
+                                deductAmount(name, price);
+                            }}
+                        >
+                            <MinusIcon />
+                        </button>
+                    )}
 
                     <button
                         className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
@@ -50,7 +52,7 @@ function Item({ name, logo, price, addAmount, deductAmount }) {
     );
 }
 
-function ItemList({ addAmount, deductAmount }) {
+function ItemList({ addAmount, deductAmount, selectedItem }) {
     const items = [
         { name: "Hamburger", logo: hamburgerLogo, price: 180 },
         {
@@ -88,6 +90,7 @@ function ItemList({ addAmount, deductAmount }) {
                                 price={item.price}
                                 addAmount={addAmount}
                                 deductAmount={deductAmount}
+                                selectedItem={selectedItem}
                             />
                         );
                     })}

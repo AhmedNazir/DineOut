@@ -108,6 +108,7 @@ export default function Order() {
                         createNewOrder={createNewOrder}
                         addAmount={addAmount}
                         deductAmount={deductAmount}
+                        selectedItem={selectedItem}
                     />
 
                     <div className="md:col-span-2 h-[calc(100vh_-_130px)]">

@@ -7,7 +7,8 @@ function CreateOrder({
     updateCutomerName,
     createNewOrder,
     addAmount,
-    deductAmount
+    deductAmount,
+    selectedItem
 }) {
     return (
         <>
@@ -35,7 +36,7 @@ function CreateOrder({
                 </div>
 
                 {/* Choose Items */}
-                <ItemList addAmount={addAmount} deductAmount={deductAmount} />
+                <ItemList addAmount={addAmount} deductAmount={deductAmount} selectedItem ={selectedItem} />
 
                 {/* Place Order Button */}
                 <button
