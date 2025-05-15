@@ -12,7 +12,7 @@ import softDrinkLogo from "../../assets/soft-drink.svg";
 import PlusIcon from "../../assets/PlusIcon";
 import MinusIcon from "../../assets/MinusIcon";
 
-function Item({ name, logo, price }) {
+function Item({ name, logo, price, addAmount, deductAmount }) {
     return (
         <>
             <div className="bg-gray-700 bg-opacity-30 rounded-md p-3 mb-3 flex justify-between items-center hover:bg-opacity-40 transition-all duration-300">
@@ -27,11 +27,21 @@ function Item({ name, logo, price }) {
                 </div>
 
                 <div className="flex justify-center gap-5">
-                    <button className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300">
+                    <button
+                        className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                        onClick={() => {
+                            deductAmount(name, price);
+                        }}
+                    >
                         <MinusIcon />
                     </button>
 
-                    <button className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300">
+                    <button
+                        className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300"
+                        onClick={() => {
+                            addAmount(name, price);
+                        }}
+                    >
                         <PlusIcon />
                     </button>
                 </div>
@@ -40,7 +50,7 @@ function Item({ name, logo, price }) {
     );
 }
 
-function ItemList() {
+function ItemList({ addAmount, deductAmount }) {
     const items = [
         { name: "Hamburger", logo: hamburgerLogo, price: 180 },
         {
@@ -76,6 +86,8 @@ function ItemList() {
                                 name={item.name}
                                 logo={item.logo}
                                 price={item.price}
+                                addAmount={addAmount}
+                                deductAmount={deductAmount}
                             />
                         );
                     })}

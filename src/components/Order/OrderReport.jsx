@@ -13,17 +13,22 @@ function DeleteButton({ id, deleteOrder }) {
     );
 }
 
-function DeliverButton() {
+function DeliverButton({ id, updateStatus }) {
     return (
         <>
-            <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
+            <button
+                className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300"
+                onClick={() => {
+                    updateStatus(id);
+                }}
+            >
                 DELIVER
             </button>
         </>
     );
 }
 
-function ListElement({ order, handleDeleteOrder }) {
+function ListElement({ order, handleDeleteOrder, handleUpdateStatus }) {
     return (
         <>
             <tr className="border-t border-gray-700">
@@ -39,14 +44,19 @@ function ListElement({ order, handleDeleteOrder }) {
                         id={order.id}
                         deleteOrder={handleDeleteOrder}
                     />
-                    {order.status === "PENDING" && <DeliverButton />}
+                    {order.status === "PENDING" && (
+                        <DeliverButton
+                            id={order.id}
+                            updateStatus={handleUpdateStatus}
+                        />
+                    )}
                 </td>
             </tr>
         </>
     );
 }
 
-function OrderReport({ orders, handleDeleteOrder }) {
+function OrderReport({ orders, handleDeleteOrder, handleUpdateStatus }) {
     return (
         <>
             <table className="min-w-full">
@@ -67,6 +77,7 @@ function OrderReport({ orders, handleDeleteOrder }) {
                                 key={order.id}
                                 order={order}
                                 handleDeleteOrder={handleDeleteOrder}
+                                handleUpdateStatus={handleUpdateStatus}
                             />
                         );
                     })}
