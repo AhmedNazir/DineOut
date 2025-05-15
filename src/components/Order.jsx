@@ -62,8 +62,8 @@ export default function Order() {
         };
 
         setNewID(++NewID);
-        setTotalOrders([...totalOrders, newOrder]);
-        setFilterOrders([...totalOrders, newOrder]);
+        setTotalOrders([newOrder, ...totalOrders]);
+        setFilterOrders([newOrder, ...totalOrders]);
         setCustomerName("");
         setTotalAmount(0);
         setTotalItems(0);

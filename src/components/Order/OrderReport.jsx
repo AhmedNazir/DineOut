@@ -37,7 +37,15 @@ function ListElement({ order, handleDeleteOrder, handleUpdateStatus }) {
                 <td className="py-3">{order.items}</td>
                 <td className="py-3">{order.amount}</td>
                 <td className="py-3">
-                    <span className="text-red-500">{order.status}</span>
+                    <span
+                        className={
+                            order.status === "PENDING"
+                                ? "text-red-500"
+                                : "text-green-500"
+                        }
+                    >
+                        {order.status}
+                    </span>
                 </td>
                 <td className="py-3">
                     <DeleteButton
