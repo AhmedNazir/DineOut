@@ -1,8 +1,13 @@
-function OrderSummary() {
-    let totalOrder = 8;
-    let pendingOrder = 7;
-    let deliveredOrder = 1;
-    
+function OrderSummary({ orders }) {
+    let totalOrder = orders.length;
+    let pendingOrder = orders.filter((order) => {
+        return order.status === "PENDING";
+    }).length;
+
+    let deliveredOrder = orders.filter((order) => {
+        return order.status === "DELIVERED";
+    }).length;
+
     return (
         <>
             <div>
