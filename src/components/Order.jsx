@@ -32,7 +32,7 @@ export default function Order() {
     function deleteOrder(id) {
         const newTotalOrders = totalOrders.filter((item) => item.id != id);
         setTotalOrders(newTotalOrders);
-        setFilterOrders(newTotalOrders);
+        // setFilterOrders(newTotalOrders);
         getFilterList(filterKey, newTotalOrders);
     }
 
@@ -42,7 +42,7 @@ export default function Order() {
         newOders[index].status = "DELIVERED";
 
         setTotalOrders(newOders);
-        setFilterOrders(newOders);
+        // setFilterOrders(newOders);
         getFilterList(filterKey, newOders);
     }
 
@@ -50,7 +50,7 @@ export default function Order() {
         setCustomerName(data);
     }
 
-    function createNewOrder(customerName, amount, items = 0) {
+    function createNewOrder(customerName, amount, items) {
         if (customerName.length <= 0 || items <= 0 || amount <= 0) return;
 
         const newOrder = {
@@ -63,7 +63,7 @@ export default function Order() {
 
         setNewID(++NewID);
         setTotalOrders([newOrder, ...totalOrders]);
-        setFilterOrders([newOrder, ...totalOrders]);
+        getFilterList(filterKey, [newOrder, ...totalOrders]);
         setCustomerName("");
         setTotalAmount(0);
         setTotalItems(0);
