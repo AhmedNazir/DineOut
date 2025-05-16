@@ -84,7 +84,8 @@ export default function Order() {
             <div className="container mx-auto px-4 h-screen flex flex-col text-white">
                 <Navbar />
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 flex-grow">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-grow">
+                    {/* CreateOrder Section */}
                     <CreateOrder
                         customerName={customerName}
                         totalAmount={totalAmount}
@@ -96,21 +97,24 @@ export default function Order() {
                         selectedItem={selectedItem}
                     />
 
-                    <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
-                        <OrderSummary orders={totalOrders} />
+                    {/* Order Summary and Report Section */}
+                    <div className="md:col-span-2 flex flex-col h-[calc(100vh_-_130px)]">
+                        {/* Order Summary */}
+                        <div className="bg-cardbg rounded-lg p-4 mb-4 overflow-auto max-h-[40vh] md:max-h-full">
+                            <OrderSummary orders={totalOrders} />
+                        </div>
 
-                        <div>
+                        {/* Order Filter and Report */}
+                        <div className="bg-cardbg rounded-lg p-4 flex flex-col gap-4 overflow-auto max-h-[50vh] md:max-h-full">
                             <OrderFilter updateFilterKey={updateFilterKey} />
 
-                            <div className="bg-cardbg rounded-lg p-4">
-                                <div className="reports-container">
-                                    <OrderReport
-                                        totalOrders={totalOrders}
-                                        handleDeleteOrder={deleteOrder}
-                                        handleUpdateStatus={updateStatus}
-                                        filterKey={filterKey}
-                                    />
-                                </div>
+                            <div className="reports-container">
+                                <OrderReport
+                                    totalOrders={totalOrders}
+                                    handleDeleteOrder={deleteOrder}
+                                    handleUpdateStatus={updateStatus}
+                                    filterKey={filterKey}
+                                />
                             </div>
                         </div>
                     </div>
