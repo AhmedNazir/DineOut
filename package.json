@@ -9,7 +9,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "push": "git push lws main && git push github main",
-        "pushall": "git add . && git commit -m 'publish' && git push lws main && git push github main"
+        "pushall": "git add . && git commit -m publish && git push lws main && git push github main"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.1.6",

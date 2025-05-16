@@ -1,6 +1,6 @@
 import FilterIcon from "../../assets/FilterIcon";
 
-function OrderFilter({ onFilter }) {
+function OrderFilter({ updateFilterKey }) {
     return (
         <>
             <div className="flex justify-between">
@@ -11,7 +11,7 @@ function OrderFilter({ onFilter }) {
                     <select
                         className="appearance-none bg-zinc-900 accent-orange-600 border-none outline-none rounded-sm"
                         onChange={(e) => {
-                            onFilter(e.target.value);
+                            updateFilterKey(e.target.value);
                         }}
                     >
                         <option>All</option>

@@ -8,7 +8,6 @@ import { useState } from "react";
 
 export default function Order() {
     const [totalOrders, setTotalOrders] = useState(SampleOrders);
-    const [filterOrders, setFilterOrders] = useState(totalOrders);
     const [filterKey, setFilterKey] = useState("All");
     const [customerName, setCustomerName] = useState("");
     let [NewID, setNewID] = useState(101);
@@ -16,24 +15,13 @@ export default function Order() {
     let [totalItems, setTotalItems] = useState(0);
     let [selectedItem, setSelectedItem] = useState({});
 
-    function getFilterList(key = filterKey, data = totalOrders) {
-        let filterList = data;
-
-        if (key == "Pending")
-            filterList = data.filter((order) => order.status === "PENDING");
-
-        if (key == "Delivered")
-            filterList = data.filter((order) => order.status === "DELIVERED");
-
-        setFilterOrders(filterList);
+    function updateFilterKey(key = filterKey) {
         setFilterKey(key);
     }
 
     function deleteOrder(id) {
         const newTotalOrders = totalOrders.filter((item) => item.id != id);
         setTotalOrders(newTotalOrders);
-        // setFilterOrders(newTotalOrders);
-        getFilterList(filterKey, newTotalOrders);
     }
 
     function updateStatus(id) {
@@ -42,8 +30,6 @@ export default function Order() {
         newOders[index].status = "DELIVERED";
 
         setTotalOrders(newOders);
-        // setFilterOrders(newOders);
-        getFilterList(filterKey, newOders);
     }
 
     function updateCutomerName(data) {
@@ -63,7 +49,6 @@ export default function Order() {
 
         setNewID(++NewID);
         setTotalOrders([newOrder, ...totalOrders]);
-        getFilterList(filterKey, [newOrder, ...totalOrders]);
         setCustomerName("");
         setTotalAmount(0);
         setTotalItems(0);
@@ -115,14 +100,15 @@ export default function Order() {
                         <OrderSummary orders={totalOrders} />
 
                         <div>
-                            <OrderFilter onFilter={getFilterList} />
+                            <OrderFilter updateFilterKey={updateFilterKey} />
 
                             <div className="bg-cardbg rounded-lg p-4">
                                 <div className="reports-container">
                                     <OrderReport
-                                        orders={filterOrders}
+                                        totalOrders={totalOrders}
                                         handleDeleteOrder={deleteOrder}
                                         handleUpdateStatus={updateStatus}
+                                        filterKey={filterKey}
                                     />
                                 </div>
                             </div>

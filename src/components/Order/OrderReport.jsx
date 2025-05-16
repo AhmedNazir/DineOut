@@ -64,7 +64,15 @@ function ListElement({ order, handleDeleteOrder, handleUpdateStatus }) {
     );
 }
 
-function OrderReport({ orders, handleDeleteOrder, handleUpdateStatus }) {
+function OrderReport({ totalOrders, handleDeleteOrder, handleUpdateStatus, filterKey }) {
+    let filterList = totalOrders;
+
+    if (filterKey == "Pending")
+        filterList = totalOrders.filter((order) => order.status === "PENDING");
+
+    if (filterKey == "Delivered")
+        filterList = totalOrders.filter((order) => order.status === "DELIVERED");
+
     return (
         <>
             <table className="min-w-full">
@@ -79,7 +87,7 @@ function OrderReport({ orders, handleDeleteOrder, handleUpdateStatus }) {
                     </tr>
                 </thead>
                 <tbody className="text-sm">
-                    {orders.map((order) => {
+                    {filterList.map((order) => {
                         return (
                             <ListElement
                                 key={order.id}
