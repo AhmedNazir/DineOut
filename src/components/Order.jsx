@@ -10,7 +10,7 @@ export default function Order() {
     const [totalOrders, setTotalOrders] = useState(SampleOrders);
     const [filterKey, setFilterKey] = useState("All");
     const [customerName, setCustomerName] = useState("");
-    let [NewID, setNewID] = useState(101);
+    let [NewID, setNewID] = useState(31);
     let [totalAmount, setTotalAmount] = useState(0);
     let [totalItems, setTotalItems] = useState(0);
     let [selectedItem, setSelectedItem] = useState({});
